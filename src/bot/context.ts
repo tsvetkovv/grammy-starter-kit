@@ -1,6 +1,6 @@
 import { Update, UserFromGetMe } from "@grammyjs/types";
 import { UserPayload } from "@prisma/client";
-import { Context as DefaultContext, SessionFlavor, type Api } from "grammy";
+import { type Api, Context as DefaultContext, SessionFlavor } from "grammy";
 import type { Container } from "~/container";
 import { Logger } from "~/logger";
 
@@ -61,7 +61,6 @@ export function createContextConstructor(container: Container) {
       this.container = container;
       this.prisma = container.prisma;
       this.logger = container.logger.child({
-        // eslint-disable-next-line camelcase
         update_id: this.update.update_id,
       });
       this.scope = {};
