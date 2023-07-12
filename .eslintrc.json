@@ -25,6 +25,7 @@
     "arrow-body-style": "off",
     "prefer-arrow-callback": "off",
     "consistent-return": "off",
+    "camelcase": "off",
     "import/prefer-default-export": "off",
     "import/extensions": "off",
     "no-underscore-dangle": "off",

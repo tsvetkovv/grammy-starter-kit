@@ -127,8 +127,12 @@ feature.command(
   chatAction("typing"),
   async (ctx) => {
     const usersCount = await ctx.prisma.user.count();
+    const chatsCount = await ctx.prisma.chat.count();
+    const messageCount = await ctx.prisma.message.count();
 
-    return ctx.reply(`Users count: ${usersCount}`);
+    return ctx.reply(`Users: ${usersCount}
+Chats: ${chatsCount}
+Messages: ${messageCount}`);
   },
 );
 

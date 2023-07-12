@@ -14,7 +14,6 @@ const configSchema = z.object({
     "silent",
   ]),
   DATABASE_URL: z.string(),
-  REDIS_URL: z.string(),
   BOT_SERVER_HOST: z.string().default("0.0.0.0"),
   BOT_SERVER_PORT: z.coerce.number().positive().default(80),
   BOT_ALLOWED_UPDATES: z.preprocess(
@@ -37,8 +36,8 @@ const parseConfig = (environment: NodeJS.ProcessEnv) => {
 
   return {
     ...config,
-    isDev: process.env.NODE_ENV === "development",
-    isProd: process.env.NODE_ENV === "production",
+    isDev: config.NODE_ENV === "development",
+    isProd: config.NODE_ENV === "production",
   };
 };
 

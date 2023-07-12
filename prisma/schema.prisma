@@ -9,6 +9,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Session {
+  id    Int    @id @default(autoincrement())
+  key   String @unique
+  value String
+}
+
 enum Role {
   USER
   ADMIN
@@ -16,12 +22,45 @@ enum Role {
 }
 
 model User {
-  id           Int      @id @default(autoincrement())
-  telegramId   BigInt   @unique @map("telegram_id")
-  languageCode String?  @map("language_code")
-  role         Role     @default(USER)
-  updatedAt    DateTime @updatedAt @map("updated_at")
-  createdAt    DateTime @default(now()) @map("created_at")
+  id           Int       @id @default(autoincrement())
+  telegramId   BigInt    @unique @map("telegram_id")
+  languageCode String?   @map("language_code")
+  role         Role      @default(USER)
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  chats        Chat[]
+  Message      Message[]
 
   @@map(name: "users")
+}
+
+model Chat {
+  id        BigInt    @id
+  type      ChatType
+  createdAt DateTime  @default(now())
+  users     User[]
+  messages  Message[]
+
+  @@map(name: "chats")
+}
+
+model Message {
+  id        BigInt   @id @default(autoincrement())
+  messageId BigInt
+  date      DateTime
+  text      String?
+  user      User     @relation(fields: [userId], references: [telegramId])
+  userId    BigInt
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  chatId    BigInt
+  meta      Json?
+
+  @@map(name: "messages")
+}
+
+enum ChatType {
+  channel
+  private
+  group
+  supergroup
 }

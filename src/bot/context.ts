@@ -1,6 +1,6 @@
 import { Update, UserFromGetMe } from "@grammyjs/types";
 import { UserPayload } from "@prisma/client";
-import { Context as DefaultContext, SessionFlavor, type Api } from "grammy";
+import { type Api, Context as DefaultContext, SessionFlavor } from "grammy";
 import type { Container } from "~/container";
 import { Logger } from "~/logger";
 
@@ -12,7 +12,7 @@ import { PrismaClientX } from "~/prisma";
 
 type ScopeUser = Omit<
   UserPayload<PrismaClientX["$extends"]["extArgs"]>["scalars"],
-  "updatedAt" | "createdAt"
+  "updatedAt" | "createdAt" | "chatId"
 >;
 
 export interface ContextScope {

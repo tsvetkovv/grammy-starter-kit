@@ -1,20 +1,18 @@
 #!/usr/bin/env tsx
-import { RedisAdapter } from "@grammyjs/storage-redis";
 import { Role } from "@prisma/client";
 import { onShutdown } from "node-graceful-shutdown";
 import { createBot } from "~/bot";
 import { createAppContainer } from "~/container";
 import { createServer } from "~/server";
+import { PrismaAdapter } from "@grammyjs/storage-prisma";
 
 const container = createAppContainer();
 
 try {
-  const { config, logger, prisma, redis } = container;
+  const { config, logger, prisma } = container;
   const bot = createBot(config.BOT_TOKEN, {
     container,
-    sessionStorage: new RedisAdapter({
-      instance: redis,
-    }),
+    sessionStorage: new PrismaAdapter(prisma.session),
   });
   await bot.init();
 
