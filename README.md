@@ -16,10 +16,10 @@ Uses PostgreSQL for data storage (MySQL, MongoDB, SQL Server, SQLite [are also s
 
 ## Usage
 
-Clone this repo or generate new repo using this template via [link](https://github.com/bot-base/telegram-bot-template/generate)
+Clone this repo
 
 ```bash
-git clone https://github.com/bot-base/telegram-bot-template
+git clone https://github.com/tsvetkovv/grammy-starter-kit
 ```
 
 <details>
@@ -110,23 +110,21 @@ cp .example.postgres.env docker-compose.prod.postgres.env
 
 </details>
 
-## Examples
-
-- [Conversations](https://github.com/bot-base/telegram-bot-template/compare/examples/conversations)
-- [Queues](https://github.com/bot-base/telegram-bot-template/compare/examples/queues)
-
 ## Environment variables reference
 
 | Variable            | Description                                                                                                                                               |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | NODE_ENV            | Node environment                                                                                                                                          |
 | LOG_LEVEL           | Log level                                                                                                                                                 |
 | CHECKPOINT_DISABLE  | [Prisma Telemetry](https://www.prisma.io/docs/concepts/more/telemetry)                                                                                    |
 | DATABASE_URL        | Database URL                                                                                                                                              |
-| REDIS_URL           | Redis URL                                                                                                                                                 |
 | BOT_SERVER_HOST     | Server address                                                                                                                                            |
 | BOT_SERVER_PORT     | Server port                                                                                                                                               |
 | BOT_ALLOWED_UPDATES | List of [update types](https://core.telegram.org/bots/api#update) to receive                                                                              |
 | BOT_TOKEN           | Token, get it from [@BotFather](https://t.me/BotFather)                                                                                                   |
 | BOT_WEBHOOK         | <details><summary>Webhook endpoint</summary>Used for setup a webhook in production mode.</details>                                                        |
 | BOT_ADMIN_USER_ID   | <details><summary>Administrator user ID</summary>Commands, such as `/stats` or `/setcommands`, will only be available to the user with this ID.</details> |
+
+## Metrics
+
+Prometheus metrics are available at `/metrics` endpoint like `http://BOT_SERVER_HOST:BOT_SERVER_PORT/metrics`

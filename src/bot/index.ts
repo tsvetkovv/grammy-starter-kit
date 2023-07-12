@@ -1,7 +1,10 @@
 import { autoChatAction } from "@grammyjs/auto-chat-action";
 import { hydrate } from "@grammyjs/hydrate";
 import { hydrateReply, parseMode } from "@grammyjs/parse-mode";
-import { BotConfig, StorageAdapter, Bot as TelegramBot } from "grammy";
+import { autoRetry } from "@grammyjs/auto-retry";
+import { limit } from "@grammyjs/ratelimiter";
+import { apiThrottler } from "@grammyjs/transformer-throttler";
+import { Bot as TelegramBot, BotConfig, StorageAdapter } from "grammy";
 import { Context, createContextConstructor } from "~/bot/context";
 import {
   botAdminFeature,
@@ -39,6 +42,8 @@ export const createBot = (
 
   // Middlewares
 
+  bot.api.config.use(autoRetry());
+  bot.api.config.use(apiThrottler());
   bot.api.config.use(parseMode("HTML"));
 
   if (config.isDev) {
@@ -46,6 +51,7 @@ export const createBot = (
   }
 
   bot.use(metrics());
+  bot.use(limit());
   bot.use(autoChatAction());
   bot.use(hydrateReply);
   bot.use(hydrate());
