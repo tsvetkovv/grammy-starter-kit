@@ -19,6 +19,7 @@ import {
   updateLogger,
 } from "~/bot/middlewares";
 import type { Container } from "~/container";
+import { saveMessage } from "~/bot/middlewares/save-message.middleware.ts";
 
 type Dependencies = {
   container: Container;
@@ -50,6 +51,7 @@ export const createBot = (
   bot.use(hydrate());
   bot.use(session(sessionStorage));
   bot.use(setScope());
+  bot.use(saveMessage());
   bot.use(i18n());
 
   // Handlers

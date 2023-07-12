@@ -12,7 +12,7 @@ import { PrismaClientX } from "~/prisma";
 
 type ScopeUser = Omit<
   UserPayload<PrismaClientX["$extends"]["extArgs"]>["scalars"],
-  "updatedAt" | "createdAt"
+  "updatedAt" | "createdAt" | "chatId"
 >;
 
 export interface ContextScope {
@@ -61,6 +61,7 @@ export function createContextConstructor(container: Container) {
       this.container = container;
       this.prisma = container.prisma;
       this.logger = container.logger.child({
+        // eslint-disable-next-line camelcase
         update_id: this.update.update_id,
       });
       this.scope = {};

@@ -41,7 +41,6 @@
   },
   "devDependencies": {
     "@types/debug": "4.1.8",
-    "@types/ioredis": "4.28.10",
     "@types/lodash": "4.14.195",
     "@types/node": "20.4.1",
     "@typescript-eslint/eslint-plugin": "6.0.0",
@@ -68,5 +67,8 @@
   },
   "lint-staged": {
     "*.ts": "npm run lint"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   }
 }

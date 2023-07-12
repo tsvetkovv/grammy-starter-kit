@@ -37,8 +37,8 @@ const parseConfig = (environment: NodeJS.ProcessEnv) => {
 
   return {
     ...config,
-    isDev: process.env.NODE_ENV === "development",
-    isProd: process.env.NODE_ENV === "production",
+    isDev: config.NODE_ENV === "development",
+    isProd: config.NODE_ENV === "production",
   };
 };
 
