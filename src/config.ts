@@ -27,9 +27,9 @@ const configSchema = z.object({
     z.array(z.enum(API_CONSTANTS.ALL_UPDATE_TYPES)),
   ),
   BOT_TOKEN: z.string(),
-  BOT_WEBHOOK: z.string().url(),
+  BOT_WEBHOOK: z.string().url().optional(),
   BOT_ADMIN_USER_ID: z.coerce.number().finite(),
-  SENTRY_DSN: z.string().default(""),
+  SENTRY_DSN: z.string().optional(),
 });
 
 const parseConfig = (environment: NodeJS.ProcessEnv) => {

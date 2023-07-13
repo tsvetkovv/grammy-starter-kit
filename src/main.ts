@@ -55,11 +55,13 @@ try {
       host: config.BOT_SERVER_HOST,
       port: config.BOT_SERVER_PORT,
     });
-
+  }
+  // eslint-disable-next-line unicorn/prefer-ternary
+  if (config.BOT_WEBHOOK) {
     await bot.api.setWebhook(config.BOT_WEBHOOK, {
       allowed_updates: config.BOT_ALLOWED_UPDATES,
     });
-  } else if (config.isDev) {
+  } else {
     await bot.start({
       allowed_updates: config.BOT_ALLOWED_UPDATES,
       onStart: ({ username }) =>
