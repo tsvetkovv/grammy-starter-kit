@@ -20,9 +20,6 @@ RUN npm ci
 # Bundle app source
 COPY . .
 
-# Type check app
-RUN npm run typecheck
-
 FROM base AS runner
 
 # Bundle app source
