@@ -8,6 +8,7 @@ import { Bot as TelegramBot, BotConfig, StorageAdapter } from "grammy";
 import { Context, createContextConstructor } from "~/bot/context";
 import {
   botAdminFeature,
+  errorFeature,
   languageFeature,
   unhandledFeature,
   welcomeFeature,
@@ -64,6 +65,7 @@ export const createBot = (
 
   bot.use(botAdminFeature);
   bot.use(welcomeFeature);
+  bot.use(errorFeature);
 
   if (isMultipleLocales) {
     bot.use(languageFeature);
@@ -71,9 +73,7 @@ export const createBot = (
 
   bot.use(unhandledFeature);
 
-  if (config.isDev) {
-    bot.catch(errorHandler);
-  }
+  bot.catch(errorHandler);
 
   return bot;
 };
