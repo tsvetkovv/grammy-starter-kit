@@ -19,6 +19,17 @@ export const createLogger = (config: Config) => {
           }),
         },
       },
+      {
+        target: "pino-sentry-transport",
+        level: "error",
+        options: {
+          sentry: {
+            dsn: config.SENTRY_DSN,
+          },
+          withLogRecord: true,
+          minLevel: 40,
+        },
+      },
     ],
   }) as DestinationStream;
 
