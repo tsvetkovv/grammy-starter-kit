@@ -4,6 +4,7 @@ import { register } from "prom-client";
 import type { Bot } from "~/bot";
 import { errorHandler } from "~/bot/handlers";
 import type { Container } from "~/container";
+import * as Sentry from "@sentry/node";
 
 export const createServer = async (bot: Bot, container: Container) => {
   const { logger, prisma } = container;
@@ -13,6 +14,8 @@ export const createServer = async (bot: Bot, container: Container) => {
   });
 
   server.setErrorHandler(async (error, request, response) => {
+    Sentry.captureException(error);
+
     if (error instanceof BotError) {
       errorHandler(error);
 
@@ -34,6 +37,7 @@ export const createServer = async (bot: Bot, container: Container) => {
 
       await response.header("Content-Type", register.contentType).send(metrics);
     } catch (error) {
+      Sentry.captureException(error);
       await response.status(500).send(error);
     }
   });

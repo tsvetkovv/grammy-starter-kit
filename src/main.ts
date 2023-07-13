@@ -6,6 +6,7 @@ import { createAppContainer } from "~/container";
 import { createServer } from "~/server";
 import { PrismaAdapter } from "@grammyjs/storage-prisma";
 import * as Sentry from "@sentry/node";
+import { getSentryConfig } from "~/sentry.config.ts";
 
 const container = createAppContainer();
 
@@ -13,11 +14,7 @@ try {
   const { config, logger, prisma } = container;
 
   if (config.SENTRY_DSN) {
-    Sentry.init({
-      dsn: config.SENTRY_DSN,
-      tracesSampleRate: 1,
-      integrations: [new Sentry.Integrations.Prisma({ client: prisma.raw })],
-    });
+    Sentry.init(getSentryConfig(container));
   }
 
   const bot = createBot(config.BOT_TOKEN, {

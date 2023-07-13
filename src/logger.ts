@@ -25,6 +25,7 @@ export const createLogger = (config: Config) => {
         options: {
           sentry: {
             dsn: config.SENTRY_DSN,
+            defaultIntegrations: false,
           },
           withLogRecord: true,
           minLevel: 40,
