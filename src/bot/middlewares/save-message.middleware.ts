@@ -1,4 +1,4 @@
-import { Context } from "~/bot/context.ts";
+import { Context } from "~/bot/context";
 import { Middleware } from "grammy";
 import { Prisma } from "@prisma/client";
 

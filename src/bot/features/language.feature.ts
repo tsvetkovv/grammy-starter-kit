@@ -1,9 +1,9 @@
 import { Composer } from "grammy";
-import { changeLanguageData } from "~/bot/callback-data";
+import { changeLanguageData } from "~/bot/callback-data/language.data";
 import type { Context } from "~/bot/context";
 import { logHandle } from "~/bot/helpers/logging";
 import { i18n } from "~/bot/i18n";
-import { createChangeLanguageKeyboard } from "~/bot/keyboards";
+import { createChangeLanguageKeyboard } from "~/bot/keyboards/change-language.keyboard";
 
 const composer = new Composer<Context>();
 

@@ -6,24 +6,20 @@ import { limit } from "@grammyjs/ratelimiter";
 import { apiThrottler } from "@grammyjs/transformer-throttler";
 import { Bot as TelegramBot, BotConfig, StorageAdapter } from "grammy";
 import { Context, createContextConstructor } from "~/bot/context";
-import {
-  botAdminFeature,
-  errorFeature,
-  languageFeature,
-  unhandledFeature,
-  welcomeFeature,
-} from "~/bot/features";
-import { errorHandler } from "~/bot/handlers";
+import { metrics } from "~/bot/middlewares/metrics.middleware";
 import { isMultipleLocales } from "~/bot/i18n";
-import {
-  i18n,
-  metrics,
-  session,
-  setScope,
-  updateLogger,
-} from "~/bot/middlewares";
 import type { Container } from "~/container";
-import { saveMessage } from "~/bot/middlewares/save-message.middleware.ts";
+import { saveMessage } from "~/bot/middlewares/save-message.middleware";
+import { updateLogger } from "~/bot/middlewares/update-logger.middleware";
+import { session } from "~/bot/middlewares/session.middleware";
+import { setScope } from "~/bot/middlewares/set-scope.middleware";
+import { i18n } from "~/bot/middlewares/i18n.middleware";
+import { botAdminFeature } from "~/bot/features/bot-admin.feature";
+import { welcomeFeature } from "~/bot/features/welcome.feature";
+import { errorFeature } from "~/bot/features/error.feature";
+import { languageFeature } from "~/bot/features/language.feature";
+import { unhandledFeature } from "~/bot/features/unhandled.feature";
+import { errorHandler } from "~/bot/handlers/error.handler";
 
 type Dependencies = {
   container: Container;

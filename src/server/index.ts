@@ -2,7 +2,7 @@ import fastify from "fastify";
 import { BotError, webhookCallback } from "grammy";
 import { register } from "prom-client";
 import type { Bot } from "~/bot";
-import { errorHandler } from "~/bot/handlers";
+import { errorHandler } from "~/bot/handlers/error.handler";
 import type { Container } from "~/container";
 import * as Sentry from "@sentry/node";
 

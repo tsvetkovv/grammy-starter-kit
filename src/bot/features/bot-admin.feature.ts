@@ -4,7 +4,6 @@ import { Composer, Keyboard } from "grammy";
 import { or } from "grammy-guard";
 import _ from "lodash";
 import type { Context } from "~/bot/context";
-import { isAdminUser, isOwnerUser } from "~/bot/filters";
 import {
   DEFAULT_LANGUAGE_CODE,
   getGroupChatCommands,
@@ -14,6 +13,8 @@ import {
 import { logHandle } from "~/bot/helpers/logging";
 import { userRequests } from "~/bot/helpers/user-requests";
 import { i18n, isMultipleLocales } from "~/bot/i18n";
+import { isAdminUser } from "~/bot/filters/is-admin-user.filter";
+import { isOwnerUser } from "~/bot/filters/is-owner-user.filter";
 
 const composer = new Composer<Context>();
 
